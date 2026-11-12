@@ -30,7 +30,6 @@ module BBa(clk100, sw, seg, disp, PWM, Trig, Echo, red1, TestA2);
     input Echo;
     output red1;
     output TestA2;
-
     reg [31:0] count;
     reg [3:0] NextState;
     wire [3:0] State;
@@ -45,11 +44,8 @@ module BBa(clk100, sw, seg, disp, PWM, Trig, Echo, red1, TestA2);
     initial begin
         NextState <= 4'h0;
     end
-
     assign TestA2 = count[19];
-
     PWM_Gen IN105 (clk100, {sw, 4'b0000}, PWM); 
-
     always @(posedge clk100) begin
         count <= count + 1;
         case (State)
@@ -78,6 +74,5 @@ module BBa(clk100, sw, seg, disp, PWM, Trig, Echo, red1, TestA2);
             end
         endcase
     end
-
     SSEG IN106 (seg, disp, clk100, RIBuff[15:0], sw);
 endmodule
